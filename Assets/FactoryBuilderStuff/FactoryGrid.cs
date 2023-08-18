@@ -5,8 +5,12 @@ using UnityEngine.UIElements;
 
 public class FactoryGrid : MonoBehaviour
 {
+    /// <summary>
+    /// The instance of FactoryGrid, making it a singleton
+    /// </summary>
     public static FactoryGrid Instance { get; private set; }
     
+    // Ensures that there is one and only one instance of FactoryGrid
     private void Awake()
     {
         if (_factoryGrid != null && Instance != this)
@@ -17,34 +21,70 @@ public class FactoryGrid : MonoBehaviour
             Instance = this;
         }
     }
-    public Machine[,] _factoryGrid;
-    [SerializeField] private int _baseSize;
-    private Machine _blockerMachine;
-    
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// The array of all of the machines in the factory
+    /// </summary>
+    public Machine[,] _factoryGrid;
+    /// <summary>
+    /// How big the side length of the factory should be
+    /// </summary>
+    [SerializeField] private int _baseSize;
+    /// <summary>
+    /// Instance of a BlockerMachine
+    /// </summary>
+    private Machine _blockerMachine;
+
+
+
+    // Initializes _factoryGrid on startup 
     void Start()
     {
         _factoryGrid = new Machine[_baseSize, _baseSize];
         _blockerMachine = GetComponent<BlockerMachine>();
     }
 
+    /// <summary>
+    /// Returns a reference to the targeted tile's machine <br/>
+    /// Returns a reference to a BlockerMachine if the targeted tile is empty or outside of the grid
+    /// </summary>
+    /// <param name="row">Targeted row</param>
+    /// <param name="column">Targeted column</param>
+    /// <returns>A reference to the targeted tile or an instance of a BlockerMachine</returns>
     public ref Machine GetMachine (int row, int column)
     {
+        if (row >= _baseSize || column >= _baseSize || row < 0 || column < 0 || _factoryGrid[row, column] == null) { return ref _blockerMachine; }
         return ref _factoryGrid[row, column];
     }
-
-    public ref Machine GetMachine (Vector2Int coordinates)
+    /// <summary>
+    /// Returns a reference to the targeted tile's machine <br/>
+    /// Returns a reference to a BlockerMachine if the targeted tile is empty or outside of the grid
+    /// </summary>
+    /// <param name="position">Vector2 of the coordinates of the targeted tile</param>
+    /// <returns>A reference to the targeted tile or an instance of a BlockerMachine</returns>
+    public ref Machine GetMachine (Vector2Int position)
     {
-        if (coordinates.x >= _baseSize || coordinates.y >= _baseSize || coordinates.x < 0 || coordinates.y < 0 || _factoryGrid[coordinates.x, coordinates.y] == null) { return ref _blockerMachine; }
-        return ref _factoryGrid[coordinates.x, coordinates.y];
+        if (position.x >= _baseSize || position.y >= _baseSize || position.x < 0 || position.y < 0 || _factoryGrid[position.x, position.y] == null) { return ref _blockerMachine; }
+        return ref _factoryGrid[position.x, position.y];
     }
 
+    /// <summary>
+    /// Returns the size of the factory grid
+    /// </summary>
+    /// <returns>The size of the factory grid</returns>
     public int GetSize()
     {
         return _baseSize;
     }
 
+    /// <summary>
+    /// Adds the inputted Machine into the factory grid at the inputted position with the inputted rotation
+    /// </summary>
+    /// <param name="row">Targeted row</param>
+    /// <param name="column">Targeted column</param>
+    /// <param name="rotation">Rotation of the machine</param>
+    /// <param name="newMachine">Machine to be added</param>
+    /// <returns>Whether or not it placed (false if there is something there already)</returns>
     public bool PlaceMachine (int row, int column, int rotation, Machine newMachine)
     {
         if (_factoryGrid[row, column] == null)
@@ -63,6 +103,38 @@ public class FactoryGrid : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Adds the inputted Machine into the factory grid at the inputted position with the inputted rotation
+    /// </summary>
+
+    /// <param name="position">Targeted position</param>
+    /// <param name="rotation">Rotation of the machine</param>
+    /// <param name="newMachine">Machine to be added</param>
+    /// <returns>Whether or not it placed (false if there is something there already)</returns>
+    public bool PlaceMachine(Vector2Int position, Orientation rotation, Machine newMachine)
+    {
+        if (_factoryGrid[position.x, position.y] == null)
+        {
+            _factoryGrid[position.x, position.y] = newMachine;
+            for (Orientation i = new(); i.FacingDirection < rotation.FacingDirection; i.RotateClockwise())
+            {
+                _factoryGrid[position.x, position.y].Rotate();
+            }
+            _factoryGrid[position.x, position.y].SetLocation(new Vector2Int(position.x, position.y));
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    /// <summary>
+    /// Removes the machine at targeted position
+    /// </summary>
+    /// <param name="position">Position of machine to be removed</param>
+    /// <returns>Success of removal (false if nothing is there to be removed)</returns>
     public bool RemoveMachine(Vector2Int position)
     {
         if (_factoryGrid[position.x, position.y] != null)
@@ -75,11 +147,17 @@ public class FactoryGrid : MonoBehaviour
         }
     }
 
-    public bool RemoveMachine(int x, int y)
+    /// <summary>
+    /// Removes the machine at targeted position
+    /// </summary>
+    /// <param name="row">targeted row</param>
+    /// <param name="column">targeted column</param>
+    /// <returns>Success of removal (false if nothing is there to be removed)</returns>
+    public bool RemoveMachine(int row, int column)
     {
-        if (_factoryGrid[x, y] != null)
+        if (_factoryGrid[row, column] != null)
         {
-            _factoryGrid[x, y] = null;
+            _factoryGrid[row, column] = null;
             return true;
         }
         else
@@ -88,6 +166,10 @@ public class FactoryGrid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Prints out the grid with Debug.Log() <br/>
+    /// Starts with top left to bottom right
+    /// </summary>
     public void PrintOutTheGrid()
     {
         for (int column = _baseSize -1; column >= 0; column--)

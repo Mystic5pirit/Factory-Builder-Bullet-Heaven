@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408d668715885694ca438fb2b52de091, type: 3}
+  m_Name: Splitter=2xIronIngot}IronIngot,IronIngot
+  m_EditorClassIdentifier: 
+  InputArray:
+  - {fileID: 11400000, guid: d85ab00548eb4da40a16ffc3ea0485cd, type: 2}
+  OutputArray:
+  - {fileID: 11400000, guid: eefeda14904d1314a8ded248e749d905, type: 2}
+  - {fileID: 11400000, guid: eefeda14904d1314a8ded248e749d905, type: 2}
+  BaseTimeToComplete: 0

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6250495450810484171
+--- !u!1001 &455003815540714709
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,17 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4826016219879855056, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e07cc8c4b747ec449ad23d3b4ca8f47c, type: 2}
     - target: {fileID: 1057434640416660639, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e07cc8c4b747ec449ad23d3b4ca8f47c, type: 2}
+      objectReference: {fileID: 2100000, guid: de9fac946f59e2746be4872bec1dbf5a, type: 2}
     - target: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_Name
-      value: ResourceGenerator
+      value: Splitter
       objectReference: {fileID: 0}
     - target: {fileID: 6150678926229784397, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,59 +56,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: Type
+      value: Splitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: RecipeList
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fa88c865d436c648bc623916940ab13, type: 2}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: PressButtonDebugItem
+      value: 
+      objectReference: {fileID: 11400000, guid: d85ab00548eb4da40a16ffc3ea0485cd, type: 2}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: IOArray.Array.data[0].IOType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: IOArray.Array.data[1].IOType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: IOArray.Array.data[3].IOType
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -1643707469625993685}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
---- !u!1 &588179658355448168 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6816086120042994851, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
-  m_PrefabInstance: {fileID: 6250495450810484171}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2186468337024803632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5253973573214775035, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
-  m_PrefabInstance: {fileID: 6250495450810484171}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7586268482548596713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
-  m_PrefabInstance: {fileID: 6250495450810484171}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-1643707469625993685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7586268482548596713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bf54880e1badc3489d5a825a199e9e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: ResourceGenerator
-  IOArray:
-  - IOType: 2
-  - IOType: 0
-  - IOType: 0
-  - IOType: 0
-  test:
-    IOType: 0
-  Location: {x: 0, y: 0}
-  InputArray: []
-  RecipeList: {fileID: 0}
-  SpeedFactor: 1
-  InputItemDisplayerList: []
-  OutputItemDisplayerList:
-  - {fileID: 588179658355448168}
-  PressButtonDebugItem: {fileID: 0}
-  _centerOfMovement: {fileID: 2186468337024803632}
-  ItemType: {fileID: 0}
-  BaseOutputSpeed: 1
-  IsEnabled: 0

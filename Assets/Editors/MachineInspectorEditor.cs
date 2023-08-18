@@ -6,6 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(Machine), true)]
 public class MachineInspectorEditor : Editor
 {
+    // Creates buttons for debug purposes
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -25,6 +26,10 @@ public class MachineInspectorEditor : Editor
         if (GUILayout.Button("Input Item From Left") && machine.PressButtonDebugItem != null)
         {
             machine.Input(3, machine.PressButtonDebugItem);
+        }
+        if (GUILayout.Button("Dump Inputs"))
+        {
+            machine.DumpInputs();
         }
     }
 }

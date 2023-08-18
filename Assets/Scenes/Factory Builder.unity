@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 282121342}
   - component: {fileID: 282121341}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,6 +591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1189372208}
+  - component: {fileID: 1189372209}
   m_Layer: 0
   m_Name: PlacementSettings
   m_TagString: Untagged
@@ -607,12 +608,33 @@ Transform:
   m_GameObject: {fileID: 1189372207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.945908, y: 1.3342419, z: 32.71408}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1189372209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189372207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5908490a1797844b73118560f9960f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentlyPlacing: 0
+  MachineList:
+  - {fileID: 957848245127991209, guid: b08e9dbd7828075439bbe12fc81a1fb7, type: 3}
+  - {fileID: 7979941084152027436, guid: dd8128cfa0e8df144bcda6dcce036c98, type: 3}
+  - {fileID: 7586268482548596713, guid: 3258674c4314eef42aff1a5557ad2ffb, type: 3}
+  - {fileID: 2295136744351429667, guid: 83c4808a48dd8644cbe3fbc15ec4a34e, type: 3}
+  - {fileID: 7650492311604176535, guid: 69dcff433041cd14a9b9890e12696806, type: 3}
+  MachineListIndex: 0
+  ConveyorBeltOrientation: 01000000000000000200000000000000
 --- !u!1 &1222809591
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,18 +664,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1f63305d863aa4a925581d0cb5cb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseIndicator: {fileID: 819185915}
   _tileSelector: {fileID: 9052653027081053597}
-  _originSelector: {fileID: 1094418266616304907, guid: 4980984d4899bf442ace29b1a542a551, type: 3}
   _factoryInputManager: {fileID: 94933198}
   _selectedTile: {x: 0, y: 0}
-  _machineList:
-  - {fileID: 957848245127991209, guid: b08e9dbd7828075439bbe12fc81a1fb7, type: 3}
-  - {fileID: 7979941084152027436, guid: dd8128cfa0e8df144bcda6dcce036c98, type: 3}
-  - {fileID: 7586268482548596713, guid: 3258674c4314eef42aff1a5557ad2ffb, type: 3}
-  - {fileID: 7650492311604176535, guid: 69dcff433041cd14a9b9890e12696806, type: 3}
-  - {fileID: 2295136744351429667, guid: 83c4808a48dd8644cbe3fbc15ec4a34e, type: 3}
   _removalBox: {fileID: 5241585798836672096, guid: c4ec1b485fa818a4d8ce2733cf1d9081, type: 3}
+  _previewBox: {fileID: 5241585798836672096, guid: 3a56d3ee84798c646865b08fe2dbcd59, type: 3}
 --- !u!4 &1222809593
 Transform:
   m_ObjectHideFlags: 0
@@ -820,7 +835,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: BlockerMachine
-  IOArray: 01000000010000000100000001000000
+  IOArray:
+  - IOType: 0
+  - IOType: 0
+  - IOType: 0
+  - IOType: 0
+  test:
+    IOType: 0
   Location: {x: 0, y: 0}
   InputArray: []
   RecipeList: {fileID: 0}
@@ -828,6 +849,7 @@ MonoBehaviour:
   InputItemDisplayerList: []
   OutputItemDisplayerList: []
   PressButtonDebugItem: {fileID: 0}
+  _centerOfMovement: {fileID: 0}
 --- !u!64 &4548339033305595946
 MeshCollider:
   m_ObjectHideFlags: 0

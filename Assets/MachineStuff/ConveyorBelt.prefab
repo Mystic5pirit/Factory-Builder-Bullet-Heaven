@@ -115,7 +115,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: ConveyorBelt
-  IOArray: 02000000000000000100000000000000
+  IOArray:
+  - IOType: 2
+  - IOType: 0
+  - IOType: 1
+  - IOType: 0
+  test:
+    IOType: 0
   Location: {x: 0, y: 0}
   InputArray: []
   RecipeList: {fileID: 0}
@@ -131,6 +137,7 @@ MonoBehaviour:
   - {fileID: 4726141141958509673}
   - {fileID: 2344698632095801414}
   PressButtonDebugItem: {fileID: 11400000, guid: 88ca4f73930966d44a6f3c8d47c15268, type: 2}
+  _centerOfMovement: {fileID: 8816577219843953520}
 --- !u!1 &2344698632095801414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1313100143338329549, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
@@ -159,6 +166,11 @@ GameObject:
 --- !u!1 &7792495447246514472 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6816086120042994851, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 3653293839597712779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8816577219843953520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5253973573214775035, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
   m_PrefabInstance: {fileID: 3653293839597712779}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &9154533969620894087 stripped

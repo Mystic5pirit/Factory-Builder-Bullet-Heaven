@@ -79,7 +79,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: Voider
-  IOArray: 01000000010000000100000001000000
+  IOArray:
+  - IOType: 1
+  - IOType: 1
+  - IOType: 1
+  - IOType: 1
+  test:
+    IOType: 0
   Location: {x: 0, y: 0}
   InputArray: []
   RecipeList: {fileID: 0}
@@ -87,3 +93,4 @@ MonoBehaviour:
   InputItemDisplayerList: []
   OutputItemDisplayerList: []
   PressButtonDebugItem: {fileID: 0}
+  _centerOfMovement: {fileID: 0}
