@@ -111,12 +111,12 @@ public class FactoryGrid : MonoBehaviour
     /// <param name="rotation">Rotation of the machine</param>
     /// <param name="newMachine">Machine to be added</param>
     /// <returns>Whether or not it placed (false if there is something there already)</returns>
-    public bool PlaceMachine(Vector2Int position, Orientation rotation, Machine newMachine)
+    public bool PlaceMachine(Vector2Int position, int rotation, Machine newMachine)
     {
         if (_factoryGrid[position.x, position.y] == null)
         {
             _factoryGrid[position.x, position.y] = newMachine;
-            for (Orientation i = new(); i.FacingDirection < rotation.FacingDirection; i.RotateClockwise())
+            for (int i = new(); i < rotation; i++)
             {
                 _factoryGrid[position.x, position.y].Rotate();
             }

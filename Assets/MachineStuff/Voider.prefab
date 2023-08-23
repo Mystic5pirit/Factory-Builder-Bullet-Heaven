@@ -61,6 +61,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -5449241585004245540}
   m_SourcePrefab: {fileID: 100100000, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+--- !u!1 &2106613266050087502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5253973573214775035, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6185109948495289525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7650492311604176535 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
@@ -84,13 +89,11 @@ MonoBehaviour:
   - IOType: 1
   - IOType: 1
   - IOType: 1
-  test:
-    IOType: 0
-  Location: {x: 0, y: 0}
-  InputArray: []
   RecipeList: {fileID: 0}
   SpeedFactor: 0
   InputItemDisplayerList: []
   OutputItemDisplayerList: []
+  CenterOfMovement: {fileID: 2106613266050087502}
+  VoidBlockedOutputs: 0
+  InputArray: []
   PressButtonDebugItem: {fileID: 0}
-  _centerOfMovement: {fileID: 0}

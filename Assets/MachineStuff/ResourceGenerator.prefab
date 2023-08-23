@@ -102,17 +102,13 @@ MonoBehaviour:
   - IOType: 0
   - IOType: 0
   - IOType: 0
-  test:
-    IOType: 0
-  Location: {x: 0, y: 0}
-  InputArray: []
   RecipeList: {fileID: 0}
   SpeedFactor: 1
   InputItemDisplayerList: []
   OutputItemDisplayerList:
   - {fileID: 588179658355448168}
+  CenterOfMovement: {fileID: 2186468337024803632}
+  VoidBlockedOutputs: 0
+  InputArray: []
   PressButtonDebugItem: {fileID: 0}
-  _centerOfMovement: {fileID: 2186468337024803632}
   ItemType: {fileID: 0}
-  BaseOutputSpeed: 1
-  IsEnabled: 0

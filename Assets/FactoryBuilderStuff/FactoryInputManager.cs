@@ -60,8 +60,8 @@ public class FactoryInputManager : MonoBehaviour
         // Switch rotation
         if (Input.GetKeyDown(KeyCode.R) && !PlacementSettings.Instance.CurrentlyPlacing)
         {
-            
-            PlacementSettings.Instance.PlaceRotation.RotateClockwise();
+
+            PlacementSettings.Instance.PlaceRotation = (PlacementSettings.Instance.PlaceRotation + 1) % 4;
             Debug.Log(PlacementSettings.Instance.PlaceRotation.ToString());
         }
 

@@ -12,8 +12,8 @@ public class ResourceGenerator : Machine
 
     private void Start()
     {
-        // Makes the resource generator not try to work without an Item
-        IsActive = false;
+        // Makes the ResourceGenerator not try to do anything in update
+        this.enabled = false;
     }
 
     /// <summary>
@@ -37,7 +37,6 @@ public class ResourceGenerator : Machine
     {
         CurrentlyDoingARecipe = true;
         ProcessingCompletionTime = ItemType.CreationTime * SpeedFactor;
-
     }
 
 

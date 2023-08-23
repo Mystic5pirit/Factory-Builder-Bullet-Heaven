@@ -39,7 +39,7 @@ public class PlacementSettings : MonoBehaviour
     /// <summary>
     /// Which direction the machines should be placed facing
     /// </summary>
-    public Orientation PlaceRotation = new();
+    public int PlaceRotation;
     /// <summary>
     /// Which mode of placing is active
     /// </summary>

@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 282121343}
   - component: {fileID: 282121342}
   - component: {fileID: 282121341}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,8 +633,14 @@ MonoBehaviour:
   - {fileID: 7586268482548596713, guid: 3258674c4314eef42aff1a5557ad2ffb, type: 3}
   - {fileID: 2295136744351429667, guid: 83c4808a48dd8644cbe3fbc15ec4a34e, type: 3}
   - {fileID: 7650492311604176535, guid: 69dcff433041cd14a9b9890e12696806, type: 3}
+  - {fileID: 4155011613865121527, guid: 3418298946cce7f47be530e88c096e90, type: 3}
   MachineListIndex: 0
-  ConveyorBeltOrientation: 01000000000000000200000000000000
+  PlaceRotation: 0
+  ConveyorBeltOrientation:
+  - IOType: 2
+  - IOType: 0
+  - IOType: 1
+  - IOType: 0
 --- !u!1 &1222809591
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,16 +846,13 @@ MonoBehaviour:
   - IOType: 0
   - IOType: 0
   - IOType: 0
-  test:
-    IOType: 0
-  Location: {x: 0, y: 0}
-  InputArray: []
   RecipeList: {fileID: 0}
   SpeedFactor: 0
   InputItemDisplayerList: []
   OutputItemDisplayerList: []
-  PressButtonDebugItem: {fileID: 0}
   _centerOfMovement: {fileID: 0}
+  InputArray: []
+  PressButtonDebugItem: {fileID: 0}
 --- !u!64 &4548339033305595946
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ public class FactoryPlacementSystem : MonoBehaviour
             if (placementMode == PlacementModeTypes.RectangleRemove)
             {
                 _placementOrigin = _selectedTile;
-                _rectangleRemovalBox = Instantiate(_removalBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 5, _selectedTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0));
+                _rectangleRemovalBox = Instantiate(_removalBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 5, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0));
             }
         }
 
@@ -85,8 +85,8 @@ public class FactoryPlacementSystem : MonoBehaviour
                 if (placementMode == PlacementModeTypes.Drag && !_listOfMachinesToBePlaced.Contains(_selectedTile))
                 {
                     _listOfMachinesToBePlaced.Add(_selectedTile);
-                    _listOfMachinesToBePlacedPreview.Add(Instantiate(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex], new Vector3(_selectedTile.x * 10 + 5, 0.1f + 2.5f, _selectedTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0)));
-                    _listOfMachinesToBePlacedPreview.Add(Instantiate(_previewBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 2.5f, _selectedTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0)));
+                    _listOfMachinesToBePlacedPreview.Add(Instantiate(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex], new Vector3(_selectedTile.x * 10 + 5, 0.1f + 2.5f, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
+                    _listOfMachinesToBePlacedPreview.Add(Instantiate(_previewBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 2.5f, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
                 }
                 // Line mode - Previews machines and boxes in a cardinal direction towards the _selectedTile
                 if (placementMode == PlacementModeTypes.Line)
@@ -126,8 +126,8 @@ public class FactoryPlacementSystem : MonoBehaviour
                     Vector2Int currentTile = _placementOrigin;
                     for (int i = 0; i < placementNumber; i++)
                     {
-                        _listOfMachinesToBePlacedPreview.Add(Instantiate(_previewBox, new Vector3(currentTile.x * 10 + 5, 0.1f + 2.5f, currentTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0)));
-                        _listOfMachinesToBePlacedPreview.Add(Instantiate(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex], new Vector3(currentTile.x * 10 + 5, 0.1f + 2.5f, currentTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0)));
+                        _listOfMachinesToBePlacedPreview.Add(Instantiate(_previewBox, new Vector3(currentTile.x * 10 + 5, 0.1f + 2.5f, currentTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
+                        _listOfMachinesToBePlacedPreview.Add(Instantiate(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex], new Vector3(currentTile.x * 10 + 5, 0.1f + 2.5f, currentTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
                         currentTile += direction;
                     }
                 }
@@ -135,7 +135,7 @@ public class FactoryPlacementSystem : MonoBehaviour
                 if (placementMode == PlacementModeTypes.DragRemove && !_listOfMachinesToBePlaced.Contains(_selectedTile))
                 {
                     _listOfMachinesToBePlaced.Add(_selectedTile);
-                    _listOfMachinesToBePlacedPreview.Add(Instantiate(_removalBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 5, _selectedTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0)));
+                    _listOfMachinesToBePlacedPreview.Add(Instantiate(_removalBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 5, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
                 }
                 // RectangleRemove mode - Previews a box of all machines to remove
                 if (placementMode == PlacementModeTypes.RectangleRemove)
@@ -253,12 +253,12 @@ public class FactoryPlacementSystem : MonoBehaviour
     /// <param name="selectedTile">Where to place</param>
     /// <param name="placeRotation">What rotation to rotate the machine</param>
     /// <param name="machineType">What type of machine to place</param>
-    private void PlaceMachine(Vector2Int selectedTile, Orientation placeRotation, GameObject machineType)
+    private void PlaceMachine(Vector2Int selectedTile, int placeRotation, GameObject machineType)
     {
         if (FactoryGrid.Instance.GetMachine(selectedTile) == null || FactoryGrid.Instance.GetMachine(selectedTile).GetMachineType() ==  "BlockerMachine")
         {
             GameObject lastPlaced = Instantiate(machineType, new Vector3(selectedTile.x * 10 + 5, 0.1f + 2.5f, selectedTile.y * 10 + 5), Quaternion.identity);
-            FactoryGrid.Instance.PlaceMachine(selectedTile.x, selectedTile.y, (int)placeRotation.FacingDirection, lastPlaced.GetComponent<Machine>());
+            FactoryGrid.Instance.PlaceMachine(selectedTile.x, selectedTile.y, placeRotation, lastPlaced.GetComponent<Machine>());
         }
     }
 

@@ -8,14 +8,14 @@ public class ConveyorBelt : Machine
     /// <summary>
     /// Which input the ConveyorBelt is currently using
     /// </summary>
-    protected int CurrentInput = 0;
+    protected int CurrentInputNumber = 0;
 
     /// <summary>
     /// Assigns relevant variables if there is something in the input
     /// </summary>
     protected override void CheckRecipe()
     {
-        if (InputArray[CurrentInput] != null)
+        if (InputArray[CurrentInputNumber] != null)
         {
             CurrentlyDoingARecipe = true;
         }
@@ -31,8 +31,8 @@ public class ConveyorBelt : Machine
     /// <returns>The item in the current input</returns>
     protected override ItemSO CalculateOutput(int outputNumber)
     {
-        CurrentInput = (CurrentInput + 1) % InputArray.Length;
-        return InputArray[CurrentInput];
+        CurrentInputNumber = (CurrentInputNumber + 1) % UsedInputDirectionList.Count;
+        return InputArray[CurrentInputNumber];
 
     }
 

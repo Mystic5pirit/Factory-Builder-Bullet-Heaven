@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Direction = Orientation.Direction;
 
 public class Voider : Machine
 {
     private void Start()
     {
         // Makes the voider not try to do anything in update
-        IsActive = false;
+        this.enabled = false;
     }
     /// <summary>
     /// Accepts input but does nothing with the inputted item
@@ -15,7 +16,7 @@ public class Voider : Machine
     /// <param name="inputDirection">Ignored</param>
     /// <param name="inputtedItem">Ignored</param>
     /// <returns>True</returns>
-    public override bool Input(int inputDirection, ItemSO inputtedItem)
+    public override bool Input(Direction inputDirection, ItemSO inputtedItem)
     {
         return true;
     }

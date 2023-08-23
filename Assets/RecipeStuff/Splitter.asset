@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f1bcf111b9df74c9ff8ec03afc2e8e, type: 3}
   m_Name: Splitter
   m_EditorClassIdentifier: 
-  RecipeList: []
+  RecipeList:
+  - {fileID: 11400000, guid: 8ef47357a7f2b4c498d02525259fc2a8, type: 2}

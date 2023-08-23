@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 755824112412117753}
   - component: {fileID: 335657265956283162}
   - component: {fileID: 2617942568647156372}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OutputItemDisplayer (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4591634740539448717}
   - component: {fileID: 7442051653854103751}
   - component: {fileID: 6183368888857873471}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InputItemDisplayer (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8791976134949689990}
   - component: {fileID: 8447120257018519413}
   - component: {fileID: 1057434640416660639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6150678926229784397}
   - component: {fileID: 7333508863365211337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MachinePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,10 +353,6 @@ MonoBehaviour:
   - IOType: 0
   - IOType: 1
   - IOType: 0
-  test:
-    IOType: 0
-  Location: {x: 0, y: 0}
-  InputArray: []
   RecipeList: {fileID: 0}
   SpeedFactor: 1
   InputItemDisplayerList:
@@ -369,8 +365,10 @@ MonoBehaviour:
   - {fileID: 8795139713819176356}
   - {fileID: 8297243704231719394}
   - {fileID: 1313100143338329549}
+  CenterOfMovement: {fileID: 5253973573214775035}
+  VoidBlockedOutputs: 0
+  InputArray: []
   PressButtonDebugItem: {fileID: 11400000, guid: 88ca4f73930966d44a6f3c8d47c15268, type: 2}
-  _centerOfMovement: {fileID: 5253973573214775035}
 --- !u!1 &5253973573214775035
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4508177090782496675}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CenterOfMovement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +412,7 @@ GameObject:
   - component: {fileID: 4262466835097578180}
   - component: {fileID: 5328272371778838017}
   - component: {fileID: 7194832589715894635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InputItemDisplayer (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +517,7 @@ GameObject:
   - component: {fileID: 7500527448030709923}
   - component: {fileID: 6285507304613400249}
   - component: {fileID: 4401118696015218739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InputItemDisplayer (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +622,7 @@ GameObject:
   - component: {fileID: 4219882760094899702}
   - component: {fileID: 8407180705864561381}
   - component: {fileID: 3851134056212315824}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OutputItemDisplayer (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +727,7 @@ GameObject:
   - component: {fileID: 8264234511577393306}
   - component: {fileID: 2523117747982386619}
   - component: {fileID: 4004866175265310209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InputItemDisplayer (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +832,7 @@ GameObject:
   - component: {fileID: 4192032140820213059}
   - component: {fileID: 5222103520144618831}
   - component: {fileID: 22171810081591707}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OutputItemDisplayer (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,7 +937,7 @@ GameObject:
   - component: {fileID: 7050270800913806371}
   - component: {fileID: 1230328864797942058}
   - component: {fileID: 2451525188556512996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OutputItemDisplayer (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

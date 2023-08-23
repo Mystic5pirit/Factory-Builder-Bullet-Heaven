@@ -17,4 +17,4 @@ MonoBehaviour:
   OutputArray:
   - {fileID: 11400000, guid: eefeda14904d1314a8ded248e749d905, type: 2}
   - {fileID: 11400000, guid: eefeda14904d1314a8ded248e749d905, type: 2}
-  BaseTimeToComplete: 0
+  BaseTimeToComplete: 1

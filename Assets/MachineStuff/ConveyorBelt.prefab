@@ -120,10 +120,6 @@ MonoBehaviour:
   - IOType: 0
   - IOType: 1
   - IOType: 0
-  test:
-    IOType: 0
-  Location: {x: 0, y: 0}
-  InputArray: []
   RecipeList: {fileID: 0}
   SpeedFactor: 1
   InputItemDisplayerList:
@@ -136,8 +132,10 @@ MonoBehaviour:
   - {fileID: 5241494648522233903}
   - {fileID: 4726141141958509673}
   - {fileID: 2344698632095801414}
+  CenterOfMovement: {fileID: 8816577219843953520}
+  VoidBlockedOutputs: 0
+  InputArray: []
   PressButtonDebugItem: {fileID: 11400000, guid: 88ca4f73930966d44a6f3c8d47c15268, type: 2}
-  _centerOfMovement: {fileID: 8816577219843953520}
 --- !u!1 &2344698632095801414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1313100143338329549, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}

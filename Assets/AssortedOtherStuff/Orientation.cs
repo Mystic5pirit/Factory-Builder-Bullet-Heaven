@@ -17,21 +17,21 @@ public class Orientation
     public Direction FacingDirection;
 
     /// <summary>
-    /// Cycles the variable by one
+    /// Cycles the variable by 1 clockwise
     /// </summary>
     public void RotateClockwise()
     {
         FacingDirection = (Direction)((int)(FacingDirection + 1) % 4);
     }
     /// <summary>
-    /// Cycles the variable by -1
+    /// Cycles the variable by 1 counterclockwise
     /// </summary>
     public void RotateCounterclockwise()
     {
-        FacingDirection = (Direction)((int)(FacingDirection - 1) % 4);
+        FacingDirection = (Direction)((int)(FacingDirection + 3) % 4);
     }
     /// <summary>
-    /// Cycles the variable by amout
+    /// Cycles the variable by amount clockwise
     /// </summary>
     /// <param name="amount">How much to rotate</param>
     public void RotateClockwise(int amount)
@@ -39,12 +39,65 @@ public class Orientation
         FacingDirection = (Direction)((int)(FacingDirection + amount) % 4);
     }
     /// <summary>
-    /// Cycles the variable by -amount
+    /// Cycles the variable by amount counterclockwise
     /// </summary>
     /// <param name="amount">How much to rotate counterclockwise</param>
     public void RotateCounterclockwise(int amount)
     {
-        FacingDirection = (Direction)((int)(FacingDirection - amount) % 4);
+        FacingDirection = (Direction)(((int)FacingDirection + 3 * amount) % 4);
+    }
+
+    /// <summary>
+    /// Flips to opposite side
+    /// </summary>
+    /// <returns>This object</returns>
+    public Orientation Flip()
+    {
+        FacingDirection = (Direction)((int)(FacingDirection + 2) % 4);
+        return this;
+    }
+
+    /// <summary>
+    /// Returns the variable cycled by 1 clockwise
+    /// </summary>
+    /// <returns>The variable cycled by 1 clockwise</returns>
+    public Direction GetDirectionRotatedClockwise()
+    {
+        return (Direction)((int)(FacingDirection + 1) % 4);
+    }
+    /// <summary>
+    /// Returns the variable cycled by 1 counterclockwise
+    /// </summary>
+    /// <returns>The variable cycled by 1 counterclockwise</returns>
+    public Direction GetDirectionRotatedCounterclockwise()
+    {
+        return (Direction)((int)(FacingDirection + 3) % 4);
+    }
+    /// <summary>
+    /// Returns the variable cycled by amount clockwise
+    /// </summary>
+    /// <param name="amount">How much to rotate by</param>
+    /// <returns>The variable cycled by amount clockwise</returns>
+    public Direction GetDirectionRotatedClockwise(int amount)
+    {
+        return (Direction)((int)(FacingDirection + amount) % 4);
+    }
+    /// <summary>
+    /// Returns the variable cycled by amount counterclockwise
+    /// </summary>
+    /// <param name="amount">How much to rotate by</param>
+    /// <returns>The variable cycled by amount counterclockwise</returns>
+    public Direction GetDirectionRotatedCounterclockwise(int amount)
+    {
+        return (Direction)(((int)FacingDirection + 3 * amount) % 4);
+    }
+    /// <summary>
+    /// Returns the opposite side from what the variable is
+    /// </summary>
+    /// <returns>The opposite side from what the variable is</returns>
+    public Direction GetOppositeDirection()
+    {
+        return (Direction)((int)(FacingDirection + 2) % 4);
     }
 
     /// <summary>
@@ -56,6 +109,11 @@ public class Orientation
         return Enum.GetName(typeof(Direction), FacingDirection);
     }
 
+    public bool Equals(Orientation other)
+    {
+        return other.FacingDirection == FacingDirection;
+    }
+
     /// <summary>
     /// Default constructor. Defaults variable to North
     /// </summary>
@@ -64,7 +122,7 @@ public class Orientation
         FacingDirection = Direction.North;
     }
     /// <summary>
-    /// Parameterized constructor. Sets variable to value
+    /// Parameterized constructor. Sets variable to enumValue
     /// </summary>
     /// <param name="enumValue">What the variable should be</param>
     public Orientation(Direction enumValue)
@@ -72,4 +130,12 @@ public class Orientation
         FacingDirection = enumValue;
     }
 
+    /// <summary>
+    /// Parameterized constructor. Sets variable to enumValue
+    /// </summary>
+    /// <param name="enumValue">What the variable should be</param>
+    public Orientation(int enumValue)
+    {
+        FacingDirection = (Direction)enumValue;
+    }
 }

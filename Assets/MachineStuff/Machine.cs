@@ -8,6 +8,8 @@ using static UnityEngine.EventSystems.StandaloneInputModule;
 using static UnityEngine.Rendering.DebugUI;
 using InputOrOutput = InputOutput.InputOrOutput;
 using Direction = Orientation.Direction;
+using System.Buffers.Text;
+using System.Drawing;
 
 [Serializable]
 public class Machine : MonoBehaviour
@@ -34,13 +36,17 @@ public class Machine : MonoBehaviour
     /// The GameObjects of the item displays
     /// </summary>
     [SerializeField] protected GameObject[] InputItemDisplayerList, OutputItemDisplayerList;
-    protected Vector3[] InputItemDisplayerStartingPosition;
-    protected List<GameObject> UsedOutputItemDisplayerList = new();
-    protected List<Vector3> UsedOutputItemDisplayerStartingPosition = new();
+    protected List<Orientation> UsedInputDirectionList = new(), UsedOutputDirectionList = new();
+    protected Vector3[] ItemDisplayStartingPositionList = new Vector3[4];
+    //protected Vector3[] InputItemDisplayerStartingPosition;
+    //protected List<GameObject> UsedOutputItemDisplayerList = new();
+    //protected List<Vector3> UsedOutputItemDisplayerStartingPositionList = new();
+    //protected List<Orientation> UsedOutputItemDisplayerDirectionList = new();
     /// <summary>
     /// Center of movement for the item displays to converge to
     /// </summary>
-    [SerializeField] private GameObject _centerOfMovement;
+    [SerializeField] protected GameObject CenterOfMovement;
+    [SerializeField] protected bool VoidBlockedOutputs = false;
 
     // POSITIONING VARIABLES
     /// <summary>
@@ -53,7 +59,7 @@ public class Machine : MonoBehaviour
     protected Vector2Int Location;
 
     // CONTENT OF THE MACHINE VARIABLES
-    protected ItemSO[] InputArray;
+    [SerializeField] protected ItemSO[] InputArray;
     protected bool CurrentlyDoingARecipe = false;//can be removed
     protected bool HasSwappedItemTypes = false;
 
@@ -65,10 +71,7 @@ public class Machine : MonoBehaviour
     // Used for debugging
     public ItemSO PressButtonDebugItem;
 
-    /// <summary>
-    /// Should the machine do anything on Update
-    /// </summary>
-    [SerializeField] protected bool IsActive = true;
+
 
 
     private void Start()
@@ -104,73 +107,71 @@ public class Machine : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (IsActive)
+        // If it isn't doing a recipe then it checks if it can
+        if (!CurrentlyDoingARecipe)
         {
-            // If it isn't doing a recipe then it checks if it can
-            if (!CurrentlyDoingARecipe)
+            CheckRecipe();
+            ProcessingTimer = 0;
+        } else if (ProcessingTimer >= ProcessingCompletionTime) // Checks if the recipe is complete
+        {
+            // Tries to output then resets variables if it did
+            if (Output())
             {
-                CheckRecipe();
-                ProcessingTimer = 0;
-            } else if (ProcessingTimer >= ProcessingCompletionTime) // Checks if the recipe is complete
-            {
-                // Tries to output then resets variables if it did
-                if (Output())
+                HasSwappedItemTypes = false;
+                CurrentlyDoingARecipe = false;
+                for (int i = 0; i < OutputItemDisplayerList.Length; i++)
                 {
-                    HasSwappedItemTypes = false;
-                    CurrentlyDoingARecipe = false;
-                    for (int i = 0; i < OutputItemDisplayerList.Length; i++)
-                    {
-                        OutputItemDisplayerList[i].GetComponent<MeshFilter>().mesh = null;
+                    OutputItemDisplayerList[i].GetComponent<MeshFilter>().mesh = null;
 
-                    }
                 }
-            } else // Currently doing a recipe that has not completed
-            {
-                // First half of processing
-                if (ProcessingTimer < ProcessingCompletionTime / 2)
-                {
-                    // Moves all input displays to _centerOfMovement.transform.position
-                    for (int i = 0; i < InputItemDisplayerList.Length; i++)
-                    {
-                        InputItemDisplayerList[i].transform.localPosition = Vector3.Lerp(InputItemDisplayerStartingPosition[i], _centerOfMovement.transform.localPosition, ProcessingTimer / ProcessingCompletionTime * 2);
-                    }
-                } else // Second half of processing
-                {
-                    // Called when it switches over from first half to second half
-                    if (!HasSwappedItemTypes)
-                    {
-                        // Makes the input displays not render
-                        foreach (GameObject item in InputItemDisplayerList)
-                        {
-                            item.GetComponent<MeshFilter>().mesh = null;
-                        }
-                        // Sets the output displays to the right mesh and material
-                        for (int i = 0;i < UsedOutputItemDisplayerList.Count; i++)
-                        {
-                            UsedOutputItemDisplayerList[i].GetComponent<MeshFilter>().mesh = CalculateOutput(i).ItemMesh;
-                            Destroy(UsedOutputItemDisplayerList[i].GetComponent<MeshRenderer>().material); // Removes the previous material to not create copies that do not have any references
-                            UsedOutputItemDisplayerList[i].GetComponent<MeshRenderer>().material = CalculateOutput(i).ItemMaterial;
-                        }
-                        // Makes it only do this swap once per recipe opperation
-                        HasSwappedItemTypes = true;
-                        // Resets input display positions
-                        for (int i = 0; i < InputItemDisplayerList.Length; i++)
-                        {
-                            InputItemDisplayerList[i].transform.localPosition = InputItemDisplayerStartingPosition[i];
-                        }
-                    } 
-                    // Moves the output displays outward from _centerOfMovement.transform.position
-                    for (int i = 0; i < UsedOutputItemDisplayerList.Count; i++)
-                    {
-                        UsedOutputItemDisplayerList[i].transform.localPosition = Vector3.Lerp(_centerOfMovement.transform.localPosition, UsedOutputItemDisplayerStartingPosition[i], (ProcessingTimer - 0.5f) / ProcessingCompletionTime * 2);
-                    }
-                
-                }
-
             }
-            // Increases the timer
-            ProcessingTimer += Time.deltaTime;
+        } else // Currently doing a recipe that has not completed
+        {
+            // First half of processing
+            if (ProcessingTimer < ProcessingCompletionTime / 2)
+            {
+                // Moves all input displays to _centerOfMovement.transform.position
+                for (int i = 0; i < UsedInputDirectionList.Count; i++)
+                {
+                    InputItemDisplayerList[(int)UsedInputDirectionList[i].FacingDirection].transform.localPosition = Vector3.Lerp(ItemDisplayStartingPositionList[(int)UsedInputDirectionList[i].FacingDirection], CenterOfMovement.transform.localPosition, ProcessingTimer / ProcessingCompletionTime * 2);
+                }
+            } else // Second half of processing
+            {
+                // Called when it switches over from first half to second half
+                if (!HasSwappedItemTypes)
+                {
+                    // Makes the input displays not render
+                    foreach (GameObject item in InputItemDisplayerList)
+                    {
+                        item.GetComponent<MeshFilter>().mesh = null;
+                    }
+                    // Sets the output displays to the right mesh and material
+                    for (int i = 0;i < UsedOutputDirectionList.Count; i++)
+                    {
+                        OutputItemDisplayerList[(int)UsedOutputDirectionList[i].FacingDirection].GetComponent<MeshFilter>().mesh = CalculateOutput(i).ItemMesh;
+                        Destroy(OutputItemDisplayerList[(int)UsedOutputDirectionList[i].FacingDirection].GetComponent<MeshRenderer>().material); // Removes the previous material to not create copies that do not have any references
+                        OutputItemDisplayerList[(int)UsedOutputDirectionList[i].FacingDirection].GetComponent<MeshRenderer>().material = CalculateOutput(i).ItemMaterial;
+                    }
+                    // Makes it only do this swap once per recipe opperation
+                    HasSwappedItemTypes = true;
+                    // Resets input display positions
+                    for (int i = 0; i < UsedInputDirectionList.Count; i++)
+                    {
+                        InputItemDisplayerList[(int)UsedInputDirectionList[i].FacingDirection].transform.localPosition = ItemDisplayStartingPositionList[(int)UsedInputDirectionList[i].FacingDirection];
+                    }
+                } 
+                // Moves the output displays outward from _centerOfMovement.transform.position
+                for (int i = 0; i < UsedOutputDirectionList.Count; i++)
+                {
+                    OutputItemDisplayerList[(int)UsedOutputDirectionList[i].FacingDirection].transform.localPosition = Vector3.Lerp(CenterOfMovement.transform.localPosition, ItemDisplayStartingPositionList[(int)UsedOutputDirectionList[i].FacingDirection], (ProcessingTimer - 0.5f) / ProcessingCompletionTime * 2);
+                }
+                
+            }
+
         }
+        // Increases the timer
+        ProcessingTimer += Time.deltaTime;
+        
     }
 
     /// <summary>
@@ -213,17 +214,17 @@ public class Machine : MonoBehaviour
     /// <param name="direction">Which direction to get from</param>
     /// <returns>A reference to the adjacent machine</returns>
     /// <exception cref="Inputted number is too high"></exception>
-    protected ref Machine GetAdjacentMachine(int direction)
+    protected ref Machine GetAdjacentMachine(Direction direction)
     {
         switch(direction)
         {
-            case 0:
+            case Direction.North:
                 return ref FactoryGrid.Instance.GetMachine(Location + Vector2Int.up);
-            case 1:
+            case Direction.East:
                 return ref FactoryGrid.Instance.GetMachine(Location + Vector2Int.right);
-            case 2:
+            case Direction.South:
                 return ref FactoryGrid.Instance.GetMachine(Location + Vector2Int.down);
-            case 3:
+            case Direction.West:
                 return ref FactoryGrid.Instance.GetMachine(Location + Vector2Int.left);
             default: 
                 throw new Exception("Inputted number is too high");
@@ -236,18 +237,38 @@ public class Machine : MonoBehaviour
     public void SetCalculatedValues()
     {
         // Adds used output displays to the list of used output displays
-        UsedOutputItemDisplayerList.Clear();
-        UsedOutputItemDisplayerStartingPosition.Clear();
+        /*UsedOutputItemDisplayerList.Clear();
+        UsedOutputItemDisplayerStartingPositionList.Clear();
+        UsedOutputItemDisplayerDirectionList.Clear();*/
+        UsedOutputDirectionList.Clear();
         for (int i = 0; i < IOArray.Length; i++)
         {
             if (IOArray[i].IOType == InputOrOutput.Output)
             {
-                UsedOutputItemDisplayerList.Add(OutputItemDisplayerList[i]);
-                UsedOutputItemDisplayerStartingPosition.Add(UsedOutputItemDisplayerList[UsedOutputItemDisplayerList.Count - 1].transform.localPosition);
+                UsedOutputDirectionList.Add(new Orientation(i));
+                /*UsedOutputItemDisplayerList.Add(OutputItemDisplayerList[i]);
+                UsedOutputItemDisplayerStartingPositionList.Add(UsedOutputItemDisplayerList[UsedOutputItemDisplayerList.Count - 1].transform.localPosition);
+                UsedOutputItemDisplayerDirectionList.Add(new Orientation(i));*/
             }
         }
 
-        // Calculates input arrays
+        UsedInputDirectionList.Clear();
+        for (int i = 0; i < IOArray.Length; i++)
+        {
+            if (IOArray[i].IOType == InputOrOutput.Input)
+            {
+                UsedInputDirectionList.Add(new Orientation(i));
+            }
+        }
+        InputArray = new ItemSO[UsedInputDirectionList.Count];
+
+        for (int i = 0; i < InputItemDisplayerList.Length; i++)
+        {
+            ItemDisplayStartingPositionList[i] = InputItemDisplayerList[i].transform.localPosition;
+        }
+
+
+        /*// Calculates input arrays
         int inputCount = 0;
         foreach (InputOutput inputOutput in IOArray)
         {
@@ -260,41 +281,43 @@ public class Machine : MonoBehaviour
         for (int i = 0; i < InputItemDisplayerList.Length; i++)
         {
             InputItemDisplayerStartingPosition[i] = InputItemDisplayerList[i].transform.localPosition;
-        }
+        }*/
     }
+
+    
 
     /// <summary>
     /// Inputs into this machine
     /// </summary>
-    /// <param name="inputDirection">Which direction the input side is on</param>
-    /// <param name="inputtedItem">Which item should be inputted</param>
+    /// <param name="inputDirection">Which direction the inputted item is going</param>
+    /// <param name="inputtedItem">Which item should be inputted. Leave out if only checking</param>
     /// <returns>True if inputted, False if full and did not input</returns>
     /// <exception cref="machine does not have an input on the side with inputDirection"></exception>
     /// <exception cref="inputNumber greater than InputArray.Length"></exception>
     /// <exception cref="inputNumber less than 0"></exception>
-    public virtual bool Input(int inputDirection, ItemSO inputtedItem)
+    public virtual bool Input(Direction inputDirection, ItemSO inputtedItem = null)
     {
+        Orientation inputOrientation = new Orientation(inputDirection).Flip();
         // Calculating which internal side (based off of the rotation and inputDirection)
-        int inputSide;
-        if (inputDirection - Rotation < 0)
-        {
-            inputSide = inputDirection - Rotation + 4;
-        } else
-        {
-            inputSide = inputDirection - Rotation;
-        }
-
+        inputDirection = inputOrientation.GetDirectionRotatedCounterclockwise(Rotation);
+        
         // Exception
-        if (IOArray[inputSide].IOType != InputOrOutput.Input) { throw new Exception("Machine does not have an input on the side with inputDirection" + inputDirection); }
-
-        // Transverse IOArray for current input
-        int inputNumber = -1;
-        for (int i = 0; i <= inputSide; i++)
+        if (IOArray[(int)inputDirection].IOType != InputOrOutput.Input)
         {
-            if (IOArray[i].IOType == InputOrOutput.Input) { inputNumber++; }
+            throw new Exception("Input: Machine does not have an input on the side with inputDirection:" + inputDirection);
         }
 
-        // Exceptions
+        // Determines which Input is being inputted into
+        int inputNumber = 0;
+        for (; inputNumber < UsedInputDirectionList.Count; inputNumber++)
+        {
+            if (UsedInputDirectionList[inputNumber].FacingDirection == inputDirection)
+            {
+                break;
+            }
+        }
+
+        // Exceptions which should never happen
         if (inputNumber >= InputArray.Length)
         {
             throw new Exception("inputNumber > InputArray.Length");
@@ -307,13 +330,16 @@ public class Machine : MonoBehaviour
         // Returns false if the slot is already full
         if (InputArray[inputNumber] != null) { return false; }
 
+        // Returns true at this point if only checking
+        if (inputtedItem == null) { return true; }
+
         // Sets the input to the right item
         InputArray[inputNumber] = inputtedItem;
 
         // Sets item displayer mesh and material
-        InputItemDisplayerList[inputDirection].GetComponent<MeshFilter>().mesh = inputtedItem.ItemMesh;
-        Destroy(InputItemDisplayerList[inputDirection].GetComponent<MeshRenderer>().material);
-        InputItemDisplayerList[inputDirection].GetComponent<MeshRenderer>().material = inputtedItem.ItemMaterial;
+        InputItemDisplayerList[(int)inputDirection].GetComponent<MeshFilter>().mesh = inputtedItem.ItemMesh;
+        Destroy(InputItemDisplayerList[(int)inputDirection].GetComponent<MeshRenderer>().material);
+        InputItemDisplayerList[(int)inputDirection].GetComponent<MeshRenderer>().material = inputtedItem.ItemMaterial;
         return true;
     }
 
@@ -326,7 +352,7 @@ public class Machine : MonoBehaviour
 
     protected virtual bool Output()
     {
-        // Goes through each output
+        /*// Goes through each output
         for (int currentOutputNumber = 0; currentOutputNumber < UsedOutputItemDisplayerList.Count; currentOutputNumber++) {
             // Determines which side the output is on (ignoring rotation)
             int outputDirection = -1;
@@ -366,6 +392,28 @@ public class Machine : MonoBehaviour
             {
                 currentOutputNumber++;
             }
+        }*/
+        int countOfValidOutputs = 0;
+        for (int i = 0; i < UsedOutputDirectionList.Count; i++)
+        {
+            Direction realDirection = UsedOutputDirectionList[i].GetDirectionRotatedClockwise(Rotation);
+            if(GetAdjacentMachine(realDirection).Input(realDirection))
+            {
+                countOfValidOutputs++;
+            }
+        }
+
+        if ((VoidBlockedOutputs || countOfValidOutputs == UsedInputDirectionList.Count))
+        {
+            for (int i = 0;i < UsedInputDirectionList.Count;i++)
+            {
+                Direction realDirection = UsedOutputDirectionList[i].GetDirectionRotatedClockwise(Rotation);
+                GetAdjacentMachine(realDirection).Input(realDirection, CalculateOutput(i));
+                OutputItemDisplayerList[(int)UsedOutputDirectionList[i].FacingDirection].GetComponent<MeshFilter>().mesh = null;
+            }
+            CurrentlyDoingARecipe = false;
+            ProcessingTimer = 0;
+            DumpInputs();
         }
         // Returns the success of outputting
         return !CurrentlyDoingARecipe;
@@ -396,6 +444,11 @@ public class Machine : MonoBehaviour
         {
             InputArray[i] = null;
         }
+    }
+
+    public void DumpInput(int inputNumber)
+    {
+        InputArray[inputNumber] = null;
     }
 
     /// <summary>

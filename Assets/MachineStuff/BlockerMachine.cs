@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Direction = Orientation.Direction;
 
 public class BlockerMachine : Machine
 {
@@ -10,14 +11,16 @@ public class BlockerMachine : Machine
     /// <param name="inputDirection"></param>
     /// <param name="inputtedItem"></param>
     /// <returns>false</returns>
-    public override bool Input(int inputDirection, ItemSO inputtedItem)
+    public override bool Input(Direction inputDirection, ItemSO inputtedItem = null)
     {
         return false;
     }
 
-    // Makes it not do anything during Update
+
+
     private void Start()
     {
-        IsActive = false;
+        // Makes the BlockerMachine not try to do anything in update
+        this.enabled = false;
     }
 }
