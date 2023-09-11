@@ -18,7 +18,7 @@ public class BlockerMachine : Machine
 
 
 
-    private void Start()
+    public override void Start()
     {
         // Makes the BlockerMachine not try to do anything in update
         this.enabled = false;

@@ -636,11 +636,19 @@ MonoBehaviour:
   - {fileID: 4155011613865121527, guid: 3418298946cce7f47be530e88c096e90, type: 3}
   MachineListIndex: 0
   PlaceRotation: 0
-  ConveyorBeltOrientation:
-  - IOType: 2
-  - IOType: 0
-  - IOType: 1
-  - IOType: 0
+  ConveyorBeltIOLocks:
+  - IO:
+      IOType: 2
+    Locked: 1
+  - IO:
+      IOType: 1
+    Locked: 1
+  - IO:
+      IOType: 1
+    Locked: 1
+  - IO:
+      IOType: 2
+    Locked: 1
 --- !u!1 &1222809591
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,15 +850,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: BlockerMachine
   IOArray:
-  - IOType: 0
-  - IOType: 0
-  - IOType: 0
-  - IOType: 0
+  - IO:
+      IOType: 0
+    Locked: 0
+  - IO:
+      IOType: 0
+    Locked: 0
+  - IO:
+      IOType: 0
+    Locked: 0
+  - IO:
+      IOType: 0
+    Locked: 0
   RecipeList: {fileID: 0}
   SpeedFactor: 0
   InputItemDisplayerList: []
   OutputItemDisplayerList: []
-  _centerOfMovement: {fileID: 0}
+  SideConveyors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CenterOfMovement: {fileID: 0}
+  VoidBlockedOutputs: 0
   InputArray: []
   PressButtonDebugItem: {fileID: 0}
 --- !u!64 &4548339033305595946

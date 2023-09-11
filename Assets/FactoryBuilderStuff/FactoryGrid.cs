@@ -95,6 +95,7 @@ public class FactoryGrid : MonoBehaviour
                 _factoryGrid[row, column].Rotate();
             }
             _factoryGrid[row, column].SetLocation(new Vector2Int(row, column));
+            _factoryGrid[row, column].FigureOutAllSides();
             return true;
         } else
         {
@@ -121,6 +122,7 @@ public class FactoryGrid : MonoBehaviour
                 _factoryGrid[position.x, position.y].Rotate();
             }
             _factoryGrid[position.x, position.y].SetLocation(new Vector2Int(position.x, position.y));
+            _factoryGrid[position.x, position.y].FigureOutAllSides();
             return true;
         }
         else
@@ -172,12 +174,29 @@ public class FactoryGrid : MonoBehaviour
     /// </summary>
     public void PrintOutTheGrid()
     {
-        for (int column = _baseSize -1; column >= 0; column--)
+        /*for (int column = _baseSize -1; column >= 0; column--)
         {
             string printOut = "|";
             for (int row = 0; row < _baseSize - 1; row++)
             {
                 printOut += _factoryGrid[row, column]?.ToString() + ", ";
+            }
+            printOut += _factoryGrid[column, _baseSize - 1];
+            printOut += "|";
+            Debug.Log(printOut);
+        }*/
+
+        for (int column = _baseSize - 1; column >= 0; column--)
+        {
+            string printOut = "| ";
+            for (int row = 0; row < _baseSize - 1; row++)
+            {
+                string machineName = GetMachine(row, column).name;
+                if (machineName != "BlockerMachine" && machineName != "FactoryGridSingleton")
+                {
+                    printOut += machineName;
+                }
+                printOut += ", ";
             }
             printOut += _factoryGrid[column, _baseSize - 1];
             printOut += "|";

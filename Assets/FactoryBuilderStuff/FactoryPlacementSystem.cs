@@ -46,7 +46,7 @@ public class FactoryPlacementSystem : MonoBehaviour
 
     private void Update()
     {
-        //
+        // Making code cleaner
         PlacementModeTypes placementMode = PlacementSettings.Instance.PlacementMode.SelectedPlacementMode;
 
         // Puts the _tileSelector in the correct spot
@@ -61,13 +61,27 @@ public class FactoryPlacementSystem : MonoBehaviour
             _listOfMachinesToBePlaced.Clear();
             _listOfMachinesToBePlacedPreview.Clear();
             PlacementSettings.Instance.CurrentlyPlacing = true;
-            // Sets origin and creates selection boxes for placement modes which require it 
-            if (placementMode == PlacementMode.PlacementModeTypes.Line)
+            // Adds the first tile for Drag mode
+            if (placementMode == PlacementModeTypes.Drag)
+            {
+                _listOfMachinesToBePlaced.Add(_selectedTile);
+                _listOfMachinesToBePlacedPreview.Add(Instantiate(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex], new Vector3(_selectedTile.x * 10 + 5, 0.1f + 2.5f, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
+                _listOfMachinesToBePlacedPreview.Add(Instantiate(_previewBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 2.5f, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
+            }
+            // Sets origin and creates selection boxes for Line mode 
+            if (placementMode == PlacementModeTypes.Line)
             {
                 _placementOrigin = _selectedTile;
                 //_linePreviewBox = Instantiate(_previewBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 5, _selectedTile.y * 10 + 5), Quaternion.Euler(0, (int)PlacementSettings.Instance.PlaceRotation.FacingDirection * 90, 0));
 
             }
+            // Adds the first tile for DragRemove mode
+            if (placementMode == PlacementModeTypes.DragRemove)
+            {
+                _listOfMachinesToBePlaced.Add(_selectedTile);
+                _listOfMachinesToBePlacedPreview.Add(Instantiate(_removalBox, new Vector3(_selectedTile.x * 10 + 5, 0.1f + 5, _selectedTile.y * 10 + 5), Quaternion.Euler(0, PlacementSettings.Instance.PlaceRotation * 90, 0)));
+            }
+            // Sets origin and creates selection boxes for RectangleRemove mode
             if (placementMode == PlacementModeTypes.RectangleRemove)
             {
                 _placementOrigin = _selectedTile;
@@ -160,12 +174,12 @@ public class FactoryPlacementSystem : MonoBehaviour
         // When Mouse is released
         if (Input.GetMouseButtonUp(0))
         {
+            PlacementSettings.Instance.CurrentlyPlacing = false;
 
             // Line mode - Adds each tile in the line to the list
             if (placementMode == PlacementModeTypes.Line)
             {
                 Vector2Int mouseOffset = _selectedTile - _placementOrigin;
-                Debug.Log((int)((Vector2.SignedAngle(mouseOffset, Vector2.right) + 225) / 90));
                 Vector2Int direction = Vector2Int.zero;
                 int placementNumber = 0;
                 switch ((int)((Vector2.SignedAngle(mouseOffset, Vector2.right) + 225) / 90))
@@ -188,7 +202,6 @@ public class FactoryPlacementSystem : MonoBehaviour
                         placementNumber = Math.Abs(mouseOffset.x) + 1;
                         break;
                 }
-                Debug.Log(direction);
                 Vector2Int currentTile = _placementOrigin;
                 _listOfMachinesToBePlaced.Clear();
                 for (int i = 0; i < placementNumber; i++)
@@ -203,9 +216,10 @@ public class FactoryPlacementSystem : MonoBehaviour
                 Vector2Int mouseOffset = _selectedTile - _placementOrigin;                
                 _listOfMachinesToBePlaced.Clear();
                 // do/while instead of for loop so it does it once if it is just a line or single tile
-                int i = 0, j = 0;
+                int i = 0;
                 do
                 {
+                    int j = 0;
                     do
                     {
                         _listOfMachinesToBePlaced.Add(_placementOrigin + new Vector2Int(i, j));
@@ -236,7 +250,6 @@ public class FactoryPlacementSystem : MonoBehaviour
                 FactoryGrid.Instance.GetMachine(_selectedTile).Rotate();
             }
 
-            PlacementSettings.Instance.CurrentlyPlacing = false;
 
             // Clears preview list
             while (_listOfMachinesToBePlacedPreview.Count > 0)

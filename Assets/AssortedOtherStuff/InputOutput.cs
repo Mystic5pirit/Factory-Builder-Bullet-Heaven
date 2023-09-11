@@ -23,6 +23,36 @@ public class InputOutput
         IOType = (InputOrOutput)((int)(IOType + 1) % 3);
     }
     /// <summary>
+    /// Swaps Input to Output and vice versa. None stays as none
+    /// </summary>
+    public void SwapIO()
+    {
+        if (IOType == InputOrOutput.Input)
+        {
+            IOType = InputOrOutput.Output;
+        }
+        if (IOType == InputOrOutput.Output)
+        {
+            IOType = InputOrOutput.Input;
+        }
+    }
+    /// <summary>
+    /// Returns Input if Output and vice versa. None stays as none
+    /// </summary>
+    /// <returns>Opposite of IOType</returns>
+    public InputOrOutput GetSwappedIO()
+    {
+        if (IOType == InputOrOutput.Input)
+        {
+            return InputOrOutput.Output;
+        }
+        if (IOType == InputOrOutput.Output)
+        {
+            return InputOrOutput.Input;
+        }
+        return InputOrOutput.None;
+    }
+    /// <summary>
     /// Sets the variable to value
     /// </summary>
     /// <param name="value">Targeted Input/Output</param>

@@ -48,7 +48,7 @@ public class PlacementSettings : MonoBehaviour
     /// <summary>
     /// Input/Output configuration for placed conveyor belts
     /// </summary>
-    public InputOutput[] ConveyorBeltOrientation = { new(InputOrOutput.Output), new(InputOrOutput.None), new(InputOrOutput.Input), new(InputOrOutput.None)};
+    public IOLock[] ConveyorBeltIOLocks = new IOLock[4];
 
     
 }

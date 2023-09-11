@@ -62,7 +62,24 @@ public class FactoryInputManager : MonoBehaviour
         {
 
             PlacementSettings.Instance.PlaceRotation = (PlacementSettings.Instance.PlaceRotation + 1) % 4;
-            Debug.Log(PlacementSettings.Instance.PlaceRotation.ToString());
+            
+            switch(PlacementSettings.Instance.PlaceRotation)
+            {
+                case 0:
+                    Debug.Log("North");
+                    break;
+                case 1:
+                    Debug.Log("East");
+                    break;
+                case 2:
+                    Debug.Log("South");
+                    break;
+                case 3:
+                    Debug.Log("West");
+                    break;
+                default:
+                    break;
+            }
         }
 
         // Switch placement mode

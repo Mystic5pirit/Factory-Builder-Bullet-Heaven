@@ -66,6 +66,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5253973573214775035, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
   m_PrefabInstance: {fileID: 6185109948495289525}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3775613105435928645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7039197307444311280, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6185109948495289525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4063942356032763252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7904919816462723521, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6185109948495289525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7650492311604176535 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
@@ -85,15 +95,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: Voider
   IOArray:
-  - IOType: 1
-  - IOType: 1
-  - IOType: 1
-  - IOType: 1
+  - IO:
+      IOType: 1
+    Locked: 1
+  - IO:
+      IOType: 1
+    Locked: 1
+  - IO:
+      IOType: 1
+    Locked: 1
+  - IO:
+      IOType: 1
+    Locked: 1
   RecipeList: {fileID: 0}
   SpeedFactor: 0
   InputItemDisplayerList: []
   OutputItemDisplayerList: []
+  SideConveyors:
+  - {fileID: 4063942356032763252}
+  - {fileID: 8906140298206711219}
+  - {fileID: 8115029695659690004}
+  - {fileID: 3775613105435928645}
   CenterOfMovement: {fileID: 2106613266050087502}
   VoidBlockedOutputs: 0
   InputArray: []
   PressButtonDebugItem: {fileID: 0}
+--- !u!1 &8115029695659690004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2687395779890451617, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6185109948495289525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8906140298206711219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3336353481176699142, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6185109948495289525}
+  m_PrefabAsset: {fileID: 0}

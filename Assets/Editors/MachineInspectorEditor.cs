@@ -30,7 +30,7 @@ public class MachineInspectorEditor : Editor
         }
         if (GUILayout.Button("Dump Inputs"))
         {
-            machine.DumpInputs();
+            machine.DumpUsedInputs();
         }
     }
 }

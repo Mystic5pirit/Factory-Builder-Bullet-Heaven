@@ -79,6 +79,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5253973573214775035, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
   m_PrefabInstance: {fileID: 6250495450810484171}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3967241195462832443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7039197307444311280, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6250495450810484171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4255289005441412106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7904919816462723521, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6250495450810484171}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7586268482548596713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
@@ -98,17 +108,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: ResourceGenerator
   IOArray:
-  - IOType: 2
-  - IOType: 0
-  - IOType: 0
-  - IOType: 0
+  - IO:
+      IOType: 2
+    Locked: 1
+  - IO:
+      IOType: 0
+    Locked: 1
+  - IO:
+      IOType: 0
+    Locked: 1
+  - IO:
+      IOType: 0
+    Locked: 1
   RecipeList: {fileID: 0}
   SpeedFactor: 1
   InputItemDisplayerList: []
   OutputItemDisplayerList:
   - {fileID: 588179658355448168}
+  SideConveyors:
+  - {fileID: 4255289005441412106}
+  - {fileID: 8715348936496108749}
+  - {fileID: 8355782904323772778}
+  - {fileID: 3967241195462832443}
   CenterOfMovement: {fileID: 2186468337024803632}
   VoidBlockedOutputs: 0
   InputArray: []
   PressButtonDebugItem: {fileID: 0}
   ItemType: {fileID: 0}
+--- !u!1 &8355782904323772778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2687395779890451617, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6250495450810484171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8715348936496108749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3336353481176699142, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 6250495450810484171}
+  m_PrefabAsset: {fileID: 0}

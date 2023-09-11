@@ -5,8 +5,9 @@ using Direction = Orientation.Direction;
 
 public class Voider : Machine
 {
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         // Makes the voider not try to do anything in update
         this.enabled = false;
     }

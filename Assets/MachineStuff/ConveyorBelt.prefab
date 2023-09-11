@@ -19,7 +19,11 @@ PrefabInstance:
     - target: {fileID: 1057434640416660639, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b719db941baea4b43a29300ad1d32f9c, type: 2}
+      objectReference: {fileID: 2100000, guid: 170521369e333b344b804c131df59bf0, type: 2}
+    - target: {fileID: 3809834831331287643, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_Name
+      value: Center
+      objectReference: {fileID: 0}
     - target: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_Name
       value: ConveyorBelt
@@ -76,13 +80,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6343593346532189343, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8791976134949689990, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 8791976134949689990, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791976134949689990, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 8791976134949689990, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -116,10 +128,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: ConveyorBelt
   IOArray:
-  - IOType: 2
-  - IOType: 0
-  - IOType: 1
-  - IOType: 0
+  - IO:
+      IOType: 0
+    Locked: 0
+  - IO:
+      IOType: 0
+    Locked: 0
+  - IO:
+      IOType: 0
+    Locked: 0
+  - IO:
+      IOType: 0
+    Locked: 0
   RecipeList: {fileID: 0}
   SpeedFactor: 1
   InputItemDisplayerList:
@@ -132,10 +152,25 @@ MonoBehaviour:
   - {fileID: 5241494648522233903}
   - {fileID: 4726141141958509673}
   - {fileID: 2344698632095801414}
+  SideConveyors:
+  - {fileID: 6845737329784314954}
+  - {fileID: 2089108051783378061}
+  - {fileID: 1727296883020865834}
+  - {fileID: 5981725626497925499}
   CenterOfMovement: {fileID: 8816577219843953520}
   VoidBlockedOutputs: 0
   InputArray: []
   PressButtonDebugItem: {fileID: 11400000, guid: 88ca4f73930966d44a6f3c8d47c15268, type: 2}
+--- !u!1 &1727296883020865834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2687395779890451617, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 3653293839597712779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2089108051783378061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3336353481176699142, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 3653293839597712779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2344698632095801414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1313100143338329549, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
@@ -159,6 +194,16 @@ GameObject:
 --- !u!1 &5241494648522233903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8795139713819176356, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 3653293839597712779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5981725626497925499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7039197307444311280, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+  m_PrefabInstance: {fileID: 3653293839597712779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6845737329784314954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7904919816462723521, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
   m_PrefabInstance: {fileID: 3653293839597712779}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7792495447246514472 stripped

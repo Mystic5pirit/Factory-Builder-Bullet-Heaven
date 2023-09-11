@@ -96,6 +96,18 @@ PrefabInstance:
       propertyPath: IOArray.Array.data[3].IOType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: IOArray.Array.data[1].IO.IOType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: IOArray.Array.data[2].IO.IOType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: IOArray.Array.data[3].IO.IOType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

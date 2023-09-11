@@ -10,8 +10,9 @@ public class ResourceGenerator : Machine
     /// </summary>
     [SerializeField] protected ItemSO ItemType;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         // Makes the ResourceGenerator not try to do anything in update
         this.enabled = false;
     }

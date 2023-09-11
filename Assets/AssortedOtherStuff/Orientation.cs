@@ -19,32 +19,40 @@ public class Orientation
     /// <summary>
     /// Cycles the variable by 1 clockwise
     /// </summary>
-    public void RotateClockwise()
+    /// <returns>This object</returns>
+    public Orientation RotateClockwise()
     {
         FacingDirection = (Direction)((int)(FacingDirection + 1) % 4);
+        return this;
     }
     /// <summary>
     /// Cycles the variable by 1 counterclockwise
     /// </summary>
-    public void RotateCounterclockwise()
+    /// <returns>This object</returns>
+    public Orientation RotateCounterclockwise()
     {
         FacingDirection = (Direction)((int)(FacingDirection + 3) % 4);
+        return this;
     }
     /// <summary>
     /// Cycles the variable by amount clockwise
     /// </summary>
     /// <param name="amount">How much to rotate</param>
-    public void RotateClockwise(int amount)
+    /// <returns>This object</returns>
+    public Orientation RotateClockwise(int amount)
     {
         FacingDirection = (Direction)((int)(FacingDirection + amount) % 4);
+        return this;
     }
     /// <summary>
     /// Cycles the variable by amount counterclockwise
     /// </summary>
     /// <param name="amount">How much to rotate counterclockwise</param>
-    public void RotateCounterclockwise(int amount)
+    /// <returns>This object</returns>
+    public Orientation RotateCounterclockwise(int amount)
     {
         FacingDirection = (Direction)(((int)FacingDirection + 3 * amount) % 4);
+        return this;
     }
 
     /// <summary>
