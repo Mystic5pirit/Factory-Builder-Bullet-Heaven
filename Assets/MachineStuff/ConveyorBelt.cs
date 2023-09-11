@@ -68,7 +68,6 @@ public class ConveyorBelt : Machine
 
     public override void RecalculateSide(Direction side)
     {
-        Debug.Log("Recalculating " + side, gameObject);
         
         if (!IOArray[(int)side].Locked)
         {
@@ -82,7 +81,6 @@ public class ConveyorBelt : Machine
 
     public override void FigureOutAllSides()
     {
-        Debug.Log("Figuring out the sides", gameObject);
 
         for (int i = 0; i < IOArray.Length; i++)
         {

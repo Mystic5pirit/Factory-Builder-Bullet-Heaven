@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a1eaf61d3fa318340a3e25291a31eca6, type: 2}
+    - target: {fileID: 3484983183177151402, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484983183177151402, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484983183177151402, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4609977941320661538, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_Name
       value: Press
@@ -59,6 +71,14 @@ PrefabInstance:
     - target: {fileID: 6150678926229784397, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343593346532189343, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718639390829222172, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: Type
