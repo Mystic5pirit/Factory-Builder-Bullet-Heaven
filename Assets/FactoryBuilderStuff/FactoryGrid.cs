@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,6 +67,19 @@ public class FactoryGrid : MonoBehaviour
     {
         if (position.x >= _baseSize || position.y >= _baseSize || position.x < 0 || position.y < 0 || _factoryGrid[position.x, position.y] == null) { return ref _blockerMachine; }
         return ref _factoryGrid[position.x, position.y];
+    }
+
+    /// <summary>
+    /// Returns whether or not there is a machine at the targeted tile
+    /// </summary>
+    /// <param name="position">Vector2 of the coordinates of the targeted tile</param>
+    /// <returns>A bool of if there is a machine at the targeted tile</returns>
+    /// <exception cref="OutOfBoundsException"></exception>
+    public bool IsThereAMachineThere (Vector2Int position)
+    {
+        if (position.x >= _baseSize || position.y >= _baseSize || position.x < 0 || position.y < 0) { throw new Exception("OutOfBoundsException"); }
+        if (_factoryGrid[position.x, position.y] == null) { return false; }
+        return true;
     }
 
     /// <summary>

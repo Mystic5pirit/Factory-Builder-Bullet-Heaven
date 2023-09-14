@@ -90,6 +90,14 @@ public class FactoryInputManager : MonoBehaviour
             
         }
 
+        // Switch secondary placement mode
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !PlacementSettings.Instance.CurrentlyPlacing)
+        {
+            PlacementSettings.Instance.SecondaryPlacementMode.Cycle();
+            Debug.Log(PlacementSettings.Instance.SecondaryPlacementMode.ToString());
+
+        }
+
         // Print out the grid
         if (Input.GetKeyDown(KeyCode.P) && !PlacementSettings.Instance.CurrentlyPlacing)
         {

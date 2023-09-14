@@ -44,6 +44,10 @@ public class PlacementSettings : MonoBehaviour
     /// Which mode of placing is active
     /// </summary>
     public PlacementMode PlacementMode = new();
+    /// <summary>
+    /// Which mode of placing is secondarily active
+    /// </summary>
+    public PlacementMode SecondaryPlacementMode = new(PlacementMode.PlacementModeTypes.DragRemove);
 
     /// <summary>
     /// Input/Output configuration for placed conveyor belts
