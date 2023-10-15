@@ -65,6 +65,14 @@ public class ConveyorBelt : Machine
 
     }
 
+    /// <summary>
+    /// Returns the Input/Output array of a new conveyorbelt that would be placed
+    /// </summary>
+    /// <returns>The Input/Output array of a new conveyorbelt that would be placed</returns>
+    public override IOLock[] GetIOArray()
+    {
+        return PlacementSettings.Instance.ConveyorBeltIOLocks;
+    }
 
     public override void RecalculateSide(Direction side)
     {

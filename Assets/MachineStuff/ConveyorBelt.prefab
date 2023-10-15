@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497344f19e835c943bbfd0322491b513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: ConveyorBelt
+  Type: Conveyor Belt
   IOArray:
   - IO:
       IOType: 0
@@ -161,6 +161,8 @@ MonoBehaviour:
   VoidBlockedOutputs: 0
   InputArray: []
   PressButtonDebugItem: {fileID: 11400000, guid: 88ca4f73930966d44a6f3c8d47c15268, type: 2}
+  CurrentInputNumber: 0
+  CurrentOutputNumber: 0
 --- !u!1 &1727296883020865834 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2687395779890451617, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}

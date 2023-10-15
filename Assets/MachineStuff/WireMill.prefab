@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: Type
-      value: WireMill
+      value: Wire Mill
       objectReference: {fileID: 0}
     - target: {fileID: 7333508863365211337, guid: a18ea78b4db667b438fa52c6dc5fd5cc, type: 3}
       propertyPath: IOArray.Array.data[0]

@@ -54,5 +54,8 @@ public class PlacementSettings : MonoBehaviour
     /// </summary>
     public IOLock[] ConveyorBeltIOLocks = new IOLock[4];
 
-    
+    /// <summary>
+    /// Whether or not the mouse is hovering over the UI elements
+    /// </summary>
+    public bool IsHoveringOverUI = false;
 }

@@ -9,6 +9,8 @@ public class FactoryInputManager : MonoBehaviour
     private Vector3 _lastPosition;
     [SerializeField] private LayerMask _placementLayermask;
 
+    [SerializeField] private FactoryHUDDisplayManager _hudDisplayManager;
+
     /// <summary>
     /// Returns position of mouse cursor
     /// </summary>
@@ -47,61 +49,60 @@ public class FactoryInputManager : MonoBehaviour
         return new Vector2Int((int)(_lastPosition.x / 10), (int)(_lastPosition.z / 10));
     }
 
+    private void Start()
+    {
+        _hudDisplayManager.ChangeMachineTypeDisplayText(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex].GetComponent<Machine>().GetMachineType());
+        _hudDisplayManager.ChangeIODisplay(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex].GetComponent<Machine>().GetIOArray());
+
+        _hudDisplayManager.SelectPrimaryImage(PlacementSettings.Instance.PlacementMode.SelectedPlacementMode);
+        _hudDisplayManager.SelectSecondaryImage(PlacementSettings.Instance.SecondaryPlacementMode.SelectedPlacementMode);
+    }
 
     private void Update()
     {
-        // Switch machine type
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !PlacementSettings.Instance.CurrentlyPlacing)
+        // Ensures settings are not changed in the middle of placing
+        if (!PlacementSettings.Instance.CurrentlyPlacing)
         {
-            PlacementSettings.Instance.MachineListIndex = (PlacementSettings.Instance.MachineListIndex + 1) % PlacementSettings.Instance.MachineList.Length;
-            Debug.Log("Placing " + PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex].GetComponent<Machine>().GetMachineType());
-        }
-
-        // Switch rotation
-        if (Input.GetKeyDown(KeyCode.R) && !PlacementSettings.Instance.CurrentlyPlacing)
-        {
-
-            PlacementSettings.Instance.PlaceRotation = (PlacementSettings.Instance.PlaceRotation + 1) % 4;
-            
-            switch(PlacementSettings.Instance.PlaceRotation)
+            // Switch machine type
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                case 0:
-                    Debug.Log("North");
-                    break;
-                case 1:
-                    Debug.Log("East");
-                    break;
-                case 2:
-                    Debug.Log("South");
-                    break;
-                case 3:
-                    Debug.Log("West");
-                    break;
-                default:
-                    break;
+                PlacementSettings.Instance.MachineListIndex = (PlacementSettings.Instance.MachineListIndex + 1) % PlacementSettings.Instance.MachineList.Length;
+                _hudDisplayManager.ChangeMachineTypeDisplayText(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex].GetComponent<Machine>().GetMachineType());
+                _hudDisplayManager.ChangeIODisplay(PlacementSettings.Instance.MachineList[PlacementSettings.Instance.MachineListIndex].GetComponent<Machine>().GetIOArray());
+            }
+
+            // Switch rotation
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+
+                PlacementSettings.Instance.PlaceRotation = (PlacementSettings.Instance.PlaceRotation + 1) % 4;
+                _hudDisplayManager.RotateRotationDisplay();
+                _hudDisplayManager.RotateIODisplay();
+            }
+
+            // Switch placement mode
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                PlacementSettings.Instance.PlacementMode.Cycle();
+                Debug.Log(PlacementSettings.Instance.PlacementMode.ToString());
+                _hudDisplayManager.SelectPrimaryImage(PlacementSettings.Instance.PlacementMode.SelectedPlacementMode);
+
+            }
+
+            // Switch secondary placement mode
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                PlacementSettings.Instance.SecondaryPlacementMode.Cycle();
+                Debug.Log(PlacementSettings.Instance.SecondaryPlacementMode.ToString());
+                _hudDisplayManager.SelectSecondaryImage(PlacementSettings.Instance.SecondaryPlacementMode.SelectedPlacementMode);
+            }
+
+            // Print out the grid
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                FactoryGrid.Instance.PrintOutTheGrid();
             }
         }
-
-        // Switch placement mode
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !PlacementSettings.Instance.CurrentlyPlacing)
-        {
-            PlacementSettings.Instance.PlacementMode.Cycle();
-            Debug.Log(PlacementSettings.Instance.PlacementMode.ToString());
-            
-        }
-
-        // Switch secondary placement mode
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !PlacementSettings.Instance.CurrentlyPlacing)
-        {
-            PlacementSettings.Instance.SecondaryPlacementMode.Cycle();
-            Debug.Log(PlacementSettings.Instance.SecondaryPlacementMode.ToString());
-
-        }
-
-        // Print out the grid
-        if (Input.GetKeyDown(KeyCode.P) && !PlacementSettings.Instance.CurrentlyPlacing)
-        {
-            FactoryGrid.Instance.PrintOutTheGrid();
-        }
+        
     }
 }

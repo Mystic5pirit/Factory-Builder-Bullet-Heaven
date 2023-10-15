@@ -479,6 +479,15 @@ public class Machine : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the Input/Output array
+    /// </summary>
+    /// <returns>The Input/Output array</returns>
+    public virtual IOLock[] GetIOArray()
+    {
+        return IOArray;
+    }
+
+    /// <summary>
     /// Sets the side's IOLock
     /// </summary>
     /// <param name="side">Which side to change</param>

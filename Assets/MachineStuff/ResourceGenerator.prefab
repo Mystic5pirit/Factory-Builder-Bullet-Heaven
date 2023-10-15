@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf54880e1badc3489d5a825a199e9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: ResourceGenerator
+  Type: Resource Generator
   IOArray:
   - IO:
       IOType: 2
